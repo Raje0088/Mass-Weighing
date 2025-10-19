@@ -33,10 +33,10 @@ function App() {
               <Product />
               {/* <ThreeDEffect /> */}
               <Testemonial />
+              <Contact />
               <div id="queries">
                 <Queries />
               </div>
-              <Contact />
             </>
           }
         />
