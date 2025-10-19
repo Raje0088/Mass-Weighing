@@ -1,0 +1,19 @@
+.test-cards{
+    display: flex;
+    gap:40px;
+     width: max-content;
+    animation:scroll-left linear 60s infinite;
+}
+
+@keyframes scroll-left{
+    0%{
+        transform:translateX(0)
+    }
+    100%{
+        transform:translateX(-50%)
+    }
+}
+
+.test-cards:hover {
+  animation-play-state: paused;
+}

@@ -1,0 +1,42 @@
+.carousel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  user-select: none;
+  cursor: grab;
+  transform: rotateX(-20deg) translateY(-70px);
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.carousel-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -100px;
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  transform: translate3d(0, 0, -10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  padding: 10px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+.carousel-image span h2{
+  font-size:18px; 
+}
+
+
+@media (max-width: 600px) {
+  .carousel {
+    height: 40vh;
+    transform: rotateX(-10deg) scale(0.6) translateY(-60px);
+  }
+}

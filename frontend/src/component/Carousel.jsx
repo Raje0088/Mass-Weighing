@@ -16,7 +16,7 @@ const Carousel = () => {
   
   const carouselContent = [
     {
-      title: "Precision Weighing Solutions",
+      title: "Precision Measurement Systems",
       subtitle: "For Industries That Demand Accuracy",
       description: "Advanced weighing systems designed for industrial applications with unmatched precision and reliability.",
       buttonText: "Explore Products"
@@ -45,11 +45,12 @@ const Carousel = () => {
           xPercent: -i * 100,
           duration: 1.5,
           delay: 3, // pause on each slide longer
+          onStart: () => setIndex(i)
         });
       });
 
       // loop back to first slide
-      t1.to(innerRef.current, { xPercent: 0, duration: 0 });
+      t1.to(innerRef.current, { xPercent: 0, duration: 1.5,delay:3,onStart:()=>{setIndex(0)} });
 
       tlRef.current = t1; // assign timeline for manual control
     }, carouRef);
@@ -116,7 +117,7 @@ const Carousel = () => {
               
               {/* Content for each slide */}
               <motion.div 
-                className="absolute inset-0 z-20 flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 text-white"
+                className="absolute inset-0 z-20 flex flex-col justify-center  md:items-start px-16 lg:px-24 text-white"
                 initial="hidden"
                 animate={idx === index ? "visible" : "hidden"}
                 variants={textVariants}

@@ -6,11 +6,11 @@ const ProductDetail = () => {
   console.log("state", state);
   return (
     <div className="main ">
-      <div className="w-full h-auto flex gap-10 ">
-        <div className="w-[60%] h-full">
+      <div className="w-full h-auto flex flex-col md:flex-row gap-10 ">
+        <div className="w-[100%] md:w-[60%] h-full">
           <img src={state} alt="" className="w-full  h-full object-cover object-center" />
         </div>
-        <div className="w-[40%] flex flex-col gap-5">
+        <div className="w-[100%] md:w-[40%] flex flex-col gap-5">
           <div>
             <h2>SS Material Handling System</h2>
           </div>
