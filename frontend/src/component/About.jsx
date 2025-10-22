@@ -46,7 +46,7 @@ const About = () => {
         {/* <span className="text-borders w-[80px] mt-1 border-b-4 border-black"></span> */}
       </motion.div>
 
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}

@@ -46,7 +46,7 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="w-auto h-auto hidden md:flex gap-5 nav-links">
+      <div className="w-auto h-auto hidden lg:flex gap-5 nav-links">
         <Link to="/">
           <h4 className="hover:text-blue-500 cursor-pointer">Home</h4>
         </Link>
@@ -142,7 +142,7 @@ const Header = () => {
       >
         <FaAngleDoubleUp className="w-10 h-10 text-white" />
       </div>
-      <div className="w-auto h-auto flex md:hidden">
+      <div className="w-auto h-auto flex lg:hidden">
         <TiThMenu
           className="w-8 h-8 cursor-pointer "
           onClick={() => {

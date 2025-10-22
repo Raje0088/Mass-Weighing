@@ -659,7 +659,7 @@ const Gallery = () => {
             <div
               key={i}
               // ref={(e1) => setSlideRef(e1, i)}
-              className="w-[100%] md:w-[32%]  h-full flex-shrink-0 relative group overflow-hidden rounded-2xl"
+              className="w-[100%] md:w-[50%] lg:w-[32%]  h-full flex-shrink-0 relative group overflow-hidden rounded-2xl"
             >
               <div className="w-full h-full flex flex-shrink-0 items-center justify-center bg-gray-100 shadow-xl">
                 <img

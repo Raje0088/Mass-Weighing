@@ -19,7 +19,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
-
+import {machineItem} from "./data.js"
 gsap.registerPlugin(useGSAP);
 
 const Product = () => {
@@ -110,10 +110,48 @@ const Product = () => {
         <h2 className="highlight">Product</h2>
         <span className="text-borders w-[80px] mt-1 border-b-4 border-black"></span>
       </div>
-      <div className="w-full h-auto grid grid-col-1 md:grid-cols-3 gap-10 ">
-        {product.map((item, idx) => (
+      <div className="w-full h-auto grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
+        {machineItem.map((item, idx) => (
           <div className="w-full h-full border flex flex-col gap-5 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.25)] hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] transition-all duration-500">
             {/* <div className="w-full h-full border-0 flex flex-col gap-5 p-2  rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"> */}
+            <div className="relative w-full h-[300px] group overflow-hidden">
+              <img
+                src={item.img}
+                alt=""
+                className="w-full h-full object-cover p-1  duration-800  group-hover:scale-125"
+              />
+              <div className="absolute top-0 left-0 w-full h-full Z-[99] duration-500 bg-black opacity-30 group-hover:opacity-0 "></div>
+            </div>
+            <div className="w-full h-auto px-5">
+              <h4 className="font-semibold mb-4">{item.details.Type}</h4>
+              <ul>
+                <li>{item.details.Type}</li>
+                <li>{item.details.Speed}</li>
+                <li>{item.details.Accuracy}</li>
+                <li>{item.details.Display}</li>
+              </ul>
+              <p>
+                {item.details.Construction}
+              </p>
+            </div>
+            <div className="w-full flex justify-center lg:justify-end p-5">
+              <button
+                ref={(e1) => (buttonRef.current[idx] = e1)}
+                onClick={() => {
+                  goToPage(item);
+                }}
+                onMouseEnter={() => {
+                  handleButtonAnimate(idx);
+                }}
+                onMouseLeave={handleButtonLeave}
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+        ))}
+        {/* {product.map((item, idx) => (
+          <div className="w-full h-full border flex flex-col gap-5 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.25)] hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] transition-all duration-500">
             <div className="relative w-full h-[300px] group overflow-hidden">
               <img
                 src={item}
@@ -135,7 +173,7 @@ const Product = () => {
                 Consequatur unde qui laboriosam accusamus nemo nulla.
               </p>
             </div>
-            <div className="w-full flex justify-center md:justify-end p-5">
+            <div className="w-full flex justify-center lg:justify-end p-5">
               <button
                 ref={(e1) => (buttonRef.current[idx] = e1)}
                 onClick={() => {
@@ -150,8 +188,9 @@ const Product = () => {
               </button>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
+   
     </div>
   );
 };

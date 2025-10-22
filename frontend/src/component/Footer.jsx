@@ -70,11 +70,11 @@ const Footer = () => {
           <div className="w-full flex items-center justify-center p-2">
             <h4 className="text-xl">Connect Us</h4>
           </div>
-          <div className="w-full flex gap-5 items-center justify-center p-2">
-            <img src={fb} alt="" className="w-10  h-10 cursor-pointer" />
-            <img src={yt} alt="" className="w-10  h-10 cursor-pointer" />
-            <img src={instagram} alt="" className="w-10  h-10 cursor-pointer" />
-            <img src={twitter} alt="" className="w-10  h-10 cursor-pointer" />
+          <div className="w-full flex gap-2 lg:gap-5 items-center justify-center p-2">
+            <img src={fb} alt="" className="w-8  h-8 lg:w-10 lg:h-10  cursor-pointer" />
+            <img src={yt} alt="" className="w-8  h-8 lg:w-10 lg:h-10 cursor-pointer" />
+            <img src={instagram} alt="" className="w-8  h-8 lg:w-10 lg:h-10 cursor-pointer" />
+            <img src={twitter} alt="" className="w-8  h-8 lg:w-10 lg:h-10 cursor-pointer" />
           </div>
         </div>
       </div>

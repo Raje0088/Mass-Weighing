@@ -34,6 +34,12 @@
 }
 
 
+@media (max-width: 1024px) {
+  .carousel {
+    height: 40vh;
+    transform: rotateX(-10deg) scale() translateY(-60px);
+  }
+}
 @media (max-width: 600px) {
   .carousel {
     height: 40vh;

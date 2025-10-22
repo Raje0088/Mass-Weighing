@@ -67,8 +67,8 @@ const GSAPCarousel = () => {
         <h2>Why Choose Us</h2>
         <span className="text-borders w-[80px] mt-1 border-b-4 border-black"></span>
       </div>
-      <div className=" w-full  flex flex-col  md:flex-row gap-5">
-        <div className="w-full md:w-1/2 bg-blue-400  p-5" ref={containerRef}>
+      <div className=" w-full  flex flex-col  lg:flex-row gap-5">
+        <div className="w-full lg:w-1/2 bg-blue-400  p-5" ref={containerRef}>
           <div className={`${styles.carousel} carousel`}>
             <div className={`${styles["carousel-image"]} carousel-image text-nowrap`}>
               <span className="text-4xl mb-3">🌟</span>
@@ -109,7 +109,7 @@ const GSAPCarousel = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-1/2   md:p-5 flex items-center justify-center ">
+        <div className="w-full lg:w-1/2   md:p-5 flex items-center justify-center ">
           <ul className="w-full  text-[14px] list-none space-y-2">
             <li className="w-full flex gap-2 items-center justify-center">
               <CiCircleCheck className="min-w-8 min-h-8 text-blue-700" />

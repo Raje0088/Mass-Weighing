@@ -15,8 +15,16 @@ import ThreeDEffect from "./component/ThreeDEffect.jsx";
 import AnimateText from "./component/AnimateText.jsx";
 import Testemonial from "./component/Testemonial.jsx";
 import Queries from "./component/Queries.jsx";
+import ChatBox from "./component/ChatBox.jsx";
 
 function App() {
+
+    const flow = {
+    "start": {
+      "message": "Hello world!"
+    }
+  }
+
   return (
     <BrowserRouter>
       <Header />
@@ -43,6 +51,7 @@ function App() {
         <Route path="/product" element={<ProductDetail />} />
       </Routes>
       <Whatapp />
+      <ChatBox />
       <Footer />
     </BrowserRouter>
   );

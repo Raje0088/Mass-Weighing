@@ -1,0 +1,5 @@
+/* Hide React Chatbotify watermark */
+.chatbotify-watermark, 
+.chatbotify-brand {
+  display: none !important;
+}
