@@ -1,66 +1,35 @@
 import React, { useRef, useEffect, useState } from "react";
-import img1 from "../assets/Pic/img1.jpg";
-import img2 from "../assets/Pic/img2.png";
-import img3 from "../assets/Pic/img3.jpg";
-import img4 from "../assets/Pic/img4.jpg";
-import img5 from "../assets/Pic/img5.jpg";
-import img6 from "../assets/Pic/img6.jpg";
-import img7 from "../assets/Pic/img7.jpg";
-import img8 from "../assets/Pic/img8.jpg";
-import img9 from "../assets/Pic/img9.png";
-import img10 from "../assets/Pic/img10.jpg";
-import img11 from "../assets/Pic/img11.jpg";
-import img12 from "../assets/Pic/img12.jpg";
-import img13 from "../assets/Pic/img13.png";
-import img14 from "../assets/Pic/img14.jpg";
-import img15 from "../assets/Pic/img15.jpg";
-import img16 from "../assets/Pic/img16.jpg";
-import img17 from "../assets/Pic/img17.jpg";
-import img18 from "../assets/Pic/img18.png";
-import img19 from "../assets/Pic/img19.jpg";
-import img20 from "../assets/Pic/img20.jpg";
-
 import { gsap } from "gsap";
 import { Draggable } from "gsap/all";
 import { ScrollTrigger } from "gsap/all";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import banner from "../assets/mass_weighing_mission_banner.png";
+import useFetch from "../services/useFetch";
 
 gsap.registerPlugin(Draggable);
 gsap.registerPlugin(ScrollTrigger);
 
+const teamUrl = `${import.meta.env.VITE_API_URL}/public/our-expert-team`
+
 const Gallery = () => {
-  const gallery = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10,
-    img11,
-    img12,
-    img13,
-    img14,
-    img15,
-    img16,
-    img17,
-    img18,
-    img19,
-    img20,
-  ];
+  const { data, loading, error } = useFetch(teamUrl);
+  const teamMembers = data?.data || [];
+
+  React.useEffect(() => {
+    console.log("=== Gallery.jsx ===");
+    console.log("Team members from backend:", teamMembers);
+  }, [data, teamMembers]);
 
   const wrapRef = useRef(null);
-  const slidesRef = useRef([]);
+  const slidesRef = useRef(null);
   let instanceRef = useRef(null);
   let draggableInstance = useRef(null);
   const [cursorIndex, setCursorIndex] = useState(null);
 
   useEffect(() => {
+    if (teamMembers.length === 0) return;
+
     const totalWidth = slidesRef.current.scrollWidth / 2;
 
     // Seamless auto-scroll
@@ -102,7 +71,7 @@ const Gallery = () => {
       if (instanceRef.current) instanceRef.current.kill();
       if (draggableInstance.current) draggableInstance.current.kill();
     };
-  }, []);
+  }, [teamMembers.length]);
 
   //  useEffect(() => {
   //     // Scroll animations for highlights and borders
@@ -160,19 +129,16 @@ const Gallery = () => {
     //     toggleActions: "play none none reverse",
     //   },
     // });
-
     // Animate the heading with a reveal effect
     // highlightsTl.fromTo(
     //   ".highlights-heading",
     //   { y: -20, opacity: 0, scale: 0.9 },
     //   { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
     // );
-
     // Animate each highlight item with staggered effects
     // gsap.utils.toArray(".highlight").forEach((item, i) => {
     //   const icon = item.querySelector(".highlight-icon");
     //   const text = item.querySelector(".highlight-text");
-
     //   const itemTl = gsap.timeline({
     //     scrollTrigger: {
     //       trigger: item,
@@ -180,7 +146,6 @@ const Gallery = () => {
     //       toggleActions: "play none none reverse",
     //     },
     //   });
-
     //   // Create a more dynamic animation sequence for each item
     //   itemTl
     //     .fromTo(
@@ -207,7 +172,6 @@ const Gallery = () => {
     //       "-=0.3"
     //     );
     // });
-
     // Add a subtle background effect to the entire section
     // gsap.fromTo(
     //   ".highlights-section",
@@ -390,7 +354,7 @@ const Gallery = () => {
                   <strong>Sustainable Practices:</strong> Committing to
                   eco-friendly engineering and responsible growth.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-500">
                   <svg
@@ -410,7 +374,7 @@ const Gallery = () => {
                   <strong>Technological Excellence:</strong> Leveraging advanced
                   technology to redefine industry benchmarks.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-500">
                   <svg
@@ -432,7 +396,7 @@ const Gallery = () => {
                   <strong>Client Empowerment:</strong> Enabling partners with
                   reliable, precise, and scalable solutions.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-500">
                   <svg
@@ -454,7 +418,7 @@ const Gallery = () => {
                   <strong>Continuous Growth:</strong> Fostering innovation,
                   learning, and improvement across every aspect of our business.
                 </span>
-              </span> 
+              </span>
             </div>
           </div>
         </div>
@@ -517,7 +481,7 @@ const Gallery = () => {
                   <strong>Precision Engineering:</strong> Every machine is
                   crafted with accuracy that defines industry standards.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-600">
                   <svg
@@ -539,7 +503,7 @@ const Gallery = () => {
                   <strong>Innovative Design:</strong> Blending technology with
                   creativity to deliver smart weighing solutions.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-600">
                   <svg
@@ -561,7 +525,7 @@ const Gallery = () => {
                   <strong>Skilled Workforce:</strong> A team united by passion,
                   experience, and a drive for perfection.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-600">
                   <svg
@@ -583,7 +547,7 @@ const Gallery = () => {
                   <strong>Advanced Infrastructure:</strong> State-of-the-art
                   facilities ensuring seamless production and testing.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-600">
                   <svg
@@ -605,7 +569,7 @@ const Gallery = () => {
                   <strong>Commitment to Quality:</strong> Uncompromising focus
                   on reliability, performance, and customer trust.
                 </span>
-              </span> 
+              </span>
               <span className="highlight flex items-center">
                 <div className="highlight-icon mr-3 text-blue-600">
                   <svg
@@ -627,7 +591,7 @@ const Gallery = () => {
                   <strong>Global Vision:</strong> Delivering excellence that
                   goes beyond borders and industries.
                 </span>
-              </span> 
+              </span>
             </div>
           </div>
         </div>
@@ -637,52 +601,62 @@ const Gallery = () => {
         <h2>Our Expert Team</h2>
         <span className="text-borders w-[80px] mt-1 border-b-4 border-black"></span>
       </div>
-      <div
-        ref={wrapRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className={`w-full h-64 overflow-hidden rounded-md relative`}
-      >
+      {loading && <p className="text-center py-10">Loading team members...</p>}
+      {error && (
+        <p className="text-center py-10 text-red-500">Error: {error}</p>
+      )}
+      {!loading && !error && teamMembers.length > 0 && (
         <div
-          onClick={() => {
-            handlePrev();
-          }}
-          className="absolute top-[50%] -translate-y-1/2 left-2 z-10 w-[50px] h-[50px] flex items-center justify-center bg-blue-500  rounded-full cursor-pointer text-white opacity-30 hover:opacity-100"
+          ref={wrapRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`w-full h-64 overflow-hidden rounded-md relative`}
         >
-          <FaAngleLeft />
-        </div>
-        <div
-          ref={slidesRef}
-          className="w-full h-full  will-change-transform flex  gap-5"
-        >
-          {[...gallery, ...gallery].map((item, i) => (
-            <div
-              key={i}
-              // ref={(e1) => setSlideRef(e1, i)}
-              className="w-[100%] md:w-[50%] lg:w-[32%]  h-full flex-shrink-0 relative group overflow-hidden rounded-2xl"
-            >
-              <div className="w-full h-full flex flex-shrink-0 items-center justify-center bg-gray-100 shadow-xl">
-                <img
-                  src={item}
-                  alt=""
-                  loading="lazy"
-                  draggable="false"
-                  className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-115 rounded-2xl "
-                />
+          <div
+            onClick={() => {
+              handlePrev();
+            }}
+            className="absolute top-[50%] -translate-y-1/2 left-2 z-10 w-[50px] h-[50px] flex items-center justify-center bg-blue-500  rounded-full cursor-pointer text-white opacity-30 hover:opacity-100"
+          >
+            <FaAngleLeft />
+          </div>
+          <div
+            ref={slidesRef}
+            className="w-full h-full  will-change-transform flex  gap-5"
+          >
+            {[...teamMembers, ...teamMembers].map((item, i) => (
+              <div
+                key={item.id || i}
+                className="w-[100%] md:w-[50%] lg:w-[32%]  h-full flex-shrink-0 relative group overflow-hidden rounded-2xl"
+              >
+                <div className="w-full h-full flex flex-shrink-0 items-center justify-center bg-gray-100 shadow-xl">
+                  {item.imageUrl && (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      loading="lazy"
+                      draggable="false"
+                      className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-115 rounded-2xl "
+                    />
+                  )}
+                </div>
+                <div className="bg-black opacity-20  translate-y-0 duration-300 group-hover:translate-y-full w-full h-full absolute  top-0 right-0 z-[999]"></div>
               </div>
-              <div className="bg-black opacity-20  translate-y-0 duration-300 group-hover:translate-y-full w-full h-full absolute  top-0 right-0 z-[999]"></div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div
+            onClick={() => {
+              handleNext();
+            }}
+            className="absolute top-[50%] -translate-y-1/2 right-2 z-10 w-[50px] h-[50px] flex items-center justify-center bg-blue-500  rounded-full cursor-pointer text-white opacity-30 hover:opacity-100"
+          >
+            <FaChevronRight />
+          </div>
         </div>
-        <div
-          onClick={() => {
-            handleNext();
-          }}
-          className="absolute top-[50%] -translate-y-1/2 right-2 z-10 w-[50px] h-[50px] flex items-center justify-center bg-blue-500  rounded-full cursor-pointer text-white opacity-30 hover:opacity-100"
-        >
-          <FaChevronRight />
-        </div>
-      </div>
+      )}
+      {!loading && !error && teamMembers.length === 0 && (
+        <p className="text-center py-10 text-gray-500">No team members yet.</p>
+      )}
     </div>
   );
 };

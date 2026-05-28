@@ -5,11 +5,23 @@ import vdo from "../assets/video1.mp4";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/all";
 import { ScrollTrigger } from "gsap/all";
+import useFetch from "../services/useFetch";
 
 gsap.registerPlugin(Draggable);
 gsap.registerPlugin(ScrollTrigger);
 
+const url = `${import.meta.env.VITE_API_URL}/public/about`;
 const About = () => {
+  const { data, loading, error } = useFetch(url);
+  const videoUrl = data?.data?.videoUrl;
+  const videoId = videoUrl?.split("/")[3]?.split("?")[0];
+
+  useEffect(() => {
+    console.log("=== About.jsx ===");
+    console.log("Loading:", loading);
+    console.log("Error:", error);
+    console.log("Data from backend:", data?.data);
+  }, [data, loading, error]);
 
   useEffect(() => {
     gsap.fromTo(
@@ -22,7 +34,7 @@ const About = () => {
         ease: "power2.inOut",
         repeat: -1,
         yoyo: true,
-      }
+      },
     );
   }, []);
 
@@ -54,7 +66,7 @@ const About = () => {
           className="w-full  h-full bg-blue-500 rounded-lg overflow-hidden shadow-xl"
         >
           <img
-            src={aboutImage}
+            src={aboutImage || data?.data?.imageUrl}
             alt="Mass Weighing & Bagging Machinery"
             className="w-full h-full object-cover"
           />
@@ -68,7 +80,7 @@ const About = () => {
           <h3 className="text-2xl font-semibold text-gray-800 mb-4">
             Our Story
           </h3>
-          <p className="text-gray-600 mb-6 leading-relaxed">
+          {/* <p className="text-gray-600 mb-6 leading-relaxed">
             Mass Weighing & Bagging Private Limited is a dynamic manufacturing
             company established in 2014 and located in Pune, Maharashtra. Our
             company is recognized as a leading manufacturer of advanced
@@ -81,6 +93,9 @@ const About = () => {
             give us repeated business but also promote by word of mouth. We are
             working hard to maintain our leading image by serving customers
             exceptionally well.
+          </p> */}
+          <p className="text-gray-600 mb-6 leading-relaxed">
+            {data?.data?.description}
           </p>
 
           <div className="grid grid-cols-2 gap-6 mt-8">
@@ -88,35 +103,51 @@ const About = () => {
               whileHover={{ y: -5 }}
               className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center justify-center"
             >
-              <h4 className="font-bold text-blue-600  text-4xl  ">10+</h4>
-              <p className="text-gray-700 text-lg md:text-xl">Years Experience</p>
+              <h4 className="font-bold text-blue-600  text-4xl  ">
+                {data?.data?.yoe}+
+              </h4>
+              <p className="text-gray-700 text-lg md:text-xl">
+                Years Experience
+              </p>
             </motion.div>
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center justify-center"
             >
-              <h4 className="font-bold text-blue-600 text-4xl">500+</h4>
-              <p className="text-gray-700 text-lg md:text-xl text-nowrap">Projects Completed</p>
+              <h4 className="font-bold text-blue-600 text-4xl">
+                {data?.data?.projectCompleted}+
+              </h4>
+              <p className="text-gray-700 text-lg md:text-xl text-nowrap">
+                Projects Completed
+              </p>
             </motion.div>
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center justify-center"
             >
-              <h4 className="font-bold text-blue-600 text-4xl ">50+</h4>
-              <p className="text-gray-700 text-lg md:text-xl text-nowrap">Team Members</p>
+              <h4 className="font-bold text-blue-600 text-4xl ">
+                {data?.data?.teamMember}+
+              </h4>
+              <p className="text-gray-700 text-lg md:text-xl text-nowrap">
+                Team Members
+              </p>
             </motion.div>
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center justify-center"
             >
-              <h4 className="font-bold text-blue-600 text-4xl ">100%</h4>
-              <p className="text-gray-700 text-lg md:text-xl text-nowrap">Client Satisfaction</p>
+              <h4 className="font-bold text-blue-600 text-4xl ">
+                {data?.data?.customerSatisfaction}%
+              </h4>
+              <p className="text-gray-700 text-lg md:text-xl text-nowrap">
+                Client Satisfaction
+              </p>
             </motion.div>
           </div>
         </motion.div>
       </div>
       <div className="w-full h-auto py-10">
-        <video
+        {/* <video
           width="100%"
           controls
           autoPlay
@@ -124,8 +155,17 @@ const About = () => {
           muted
           className="rounded-2xl"
         >
-          <source src={vdo} type="video/mp4" />
-        </video>
+          <source src={data?.data?.videoUrl || vdo} type="video/mp4" />
+        </video> */}
+        <iframe
+          width="100%"
+          height="600"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
+          title="YouTube video player"
+          className="rounded-2xl"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        />
       </div>
     </div>
   );

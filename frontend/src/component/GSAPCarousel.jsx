@@ -4,11 +4,14 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Observer } from "gsap/all";
 import { CiCircleCheck } from "react-icons/ci";
-
+import useFetch from "../services/useFetch";
 gsap.registerPlugin(Observer, useGSAP);
 
+const url = `${import.meta.env.VITE_API_URL}/public/why-choose-us`
 const GSAPCarousel = () => {
   const containerRef = useRef(null);
+   const { data, loading, error } = useFetch(url);
+  
   useGSAP(() => {
     const root = containerRef.current;
     const images = root.querySelectorAll(".carousel-image");
@@ -111,7 +114,15 @@ const GSAPCarousel = () => {
         </div>
         <div className="w-full lg:w-1/2   md:p-5 flex items-center justify-center ">
           <ul className="w-full  text-[14px] list-none space-y-2">
-            <li className="w-full flex gap-2 items-center justify-center">
+            {data?.data?.bulletPoints.map((i)=>(
+              <li className="w-full flex gap-2 items-center justify-center">
+              <CiCircleCheck className="min-w-8 min-h-8 text-blue-700" />
+              <span>
+                {i}
+              </span>
+            </li>
+            )) }
+            {/* <li className="w-full flex gap-2 items-center justify-center">
               <CiCircleCheck className="min-w-8 min-h-8 text-blue-700" />
               <span>
                 We specialize in Jumbo, Simplex, and Duplex Bagging Machines,
@@ -174,7 +185,7 @@ const GSAPCarousel = () => {
                 Delivering premium-grade equipment that blends performance and
                 durability—at highly competitive prices
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

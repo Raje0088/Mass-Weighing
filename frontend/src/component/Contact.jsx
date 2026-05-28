@@ -7,8 +7,12 @@ import phone from "../assets/gif/phone.gif";
 import email from "../assets/gif/email.gif";
 import address from "../assets/gif/location.png";
 import { MdMarkEmailRead } from "react-icons/md";
+import useFetch from "../services/useFetch";
 
 const Contact = () => {
+  const url = `${import.meta.env.VITE_API_URL}/public/address`
+  const { data, loading, error } = useFetch(url);
+  console.log("address", data?.data);
   useEffect(() => {
     const cards = document.querySelectorAll(".card");
 
@@ -54,7 +58,8 @@ const Contact = () => {
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe> */}
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7574.008658580079!2d73.81650401121162!3d18.34708692422449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc293fc153aa287%3A0xcbd38c37553970e2!2sMass%20Weighing%20And%20Bagging%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1760860468610!5m2!1sen!2sin"
+          // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7574.008658580079!2d73.81650401121162!3d18.34708692422449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc293fc153aa287%3A0xcbd38c37553970e2!2sMass%20Weighing%20And%20Bagging%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1760860468610!5m2!1sen!2sin"
+          src={data?.data?.mapUrl}
           width="100%"
           height="450"
           allowfullscreen={true}
@@ -79,14 +84,16 @@ const Contact = () => {
             <p className="mb-4">
               {" "}
               <strong>Registered Office: </strong>
-              D-204, Reelicon Garden Frove, S. No. 39/15B & 16, Ambegaon (BK),
-              Pune 411046
+              {/* D-204, Reelicon Garden Frove, S. No. 39/15B & 16, Ambegaon (BK),
+              Pune 411046 */}
+              {data?.data?.registeredOffice}
             </p>
             <p>
               {" "}
               <strong>Work: </strong>
-              Gat NO. 63, Ranje pune satara road , Taluka Bhor,Pune - 412205,
-              Maharashtra, India
+              {/* Gat NO. 63, Ranje pune satara road , Taluka Bhor,Pune - 412205,
+              Maharashtra, India */}
+              {data?.data?.workAddress}
             </p>
           </span>
           {/* <div className="open-card absolute text-white  top-0 left-0 w-full h-full flex items-center justify-center">
@@ -115,9 +122,12 @@ const Contact = () => {
           </div>
 
           <span className="">
-            <h4 className="font-semibold leading-5">ceo@massweighing.com</h4>
-            <h4 className="font-semibold leading-5">info@massweighing.com</h4>
-            <h4 className="font-semibold leading-5">mkt1@massweighing.com</h4>
+            {data?.data?.emails?.map((e) => (
+              <h4 className="font-semibold leading-5">{e}</h4>
+            ))}
+            {/* <h4 className="font-semibold leading-5">ceo@massweighing.com</h4> */}
+            {/* <h4 className="font-semibold leading-5">info@massweighing.com</h4> */}
+            {/* <h4 className="font-semibold leading-5">mkt1@massweighing.com</h4> */}
           </span>
           {/* <div className="open-card absolute text-white  top-0 left-0 w-full h-full flex items-center justify-center">
             <div
@@ -147,9 +157,12 @@ const Contact = () => {
               Mr. Bharat Eknath Patil (Director)
             </h4>
             <h4 className="font-semibold leading-0 mb-5">+91-8045812075</h4>
-            <p className=""><strong>Office</strong></p>
-            <h4 className="font-semibold">+91-9860556033</h4>
-            <h4 className="font-semibold">+91-9823192366</h4>
+            <p className="">
+              <strong>Office</strong>
+            </p>
+            {data?.data?.mobiles?.map((m) => (
+              <h4 className="font-semibold">{m}</h4>
+            ))}
           </span>
 
           {/* <div className="open-card absolute text-white  top-0 left-0 w-full h-full flex items-center justify-center">
